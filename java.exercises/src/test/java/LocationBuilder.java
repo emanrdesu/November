@@ -7,13 +7,13 @@ public class LocationBuilder {
 		this.mother = new LocationObjectMother();
 	}
 
-	public LocationBuilder withState(State s) {
-		this.mother.State = s;
+	public LocationBuilder withState(State state) {
+		this.mother.State = state;
 		return this;
 	}
 
-	public LocationBuilder withCity(City c) {
-		this.mother.City = c;
+	public LocationBuilder withCity(City city) {
+		this.mother.City = city;
 		return this;
 	}
 
