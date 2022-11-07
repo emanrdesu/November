@@ -19,7 +19,7 @@ public class DataProviderTests {
 		var actualAbbreviation = States.Texas.Abbreviation;
 		
 		var errorMessage = "City abbreviation should be returned.";
-		Assert.assertEquals(actualAbbr, expectedAbbr, errorMessage);  
+		Assert.assertEquals(actualAbbreviation, expectedAbbreviation, errorMessage);  
 	}
 
 	@Test
