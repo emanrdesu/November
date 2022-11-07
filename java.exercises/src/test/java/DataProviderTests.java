@@ -14,9 +14,9 @@ public class DataProviderTests {
 
 	@Test
 	public void canGetStateAbbreviation() {
-		var expectedAbbr = "TX";
+		var expectedAbbreviation = "TX";
 		
-		var actualAbbr = States.Texas.Abbreviation;
+		var actualAbbreviation = States.Texas.Abbreviation;
 		
 		var errorMessage = "City abbreviation should be returned.";
 		Assert.assertEquals(actualAbbr, expectedAbbr, errorMessage);  
@@ -34,12 +34,12 @@ public class DataProviderTests {
 
 	@Test
 	public void canGetStateAbbreviation2( ) {
-		var expectedAbbr = "FL";
+		var expectedAbbreviation = "FL";
 		
-		var actualAbbr = States.Florida.Abbreviation;
+		var actualAbbreviation = States.Florida.Abbreviation;
 		
 		var errorMessage = "City abbreviation should be returned.";
-		Assert.assertEquals(actualAbbr, expectedAbbr, errorMessage);  
+		Assert.assertEquals(actualAbbreviation, expectedAbbreviation, errorMessage);  
 	}
 
 	@Test
