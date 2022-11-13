@@ -30,13 +30,13 @@ public class JdbcTests {
         accessor.ExecuteSingleColumn(query);
     }
 	
-	@Test
+    @Test
     public void canExecuteCell() {
         var query = "select max(amount) from payment";
         accessor.ExecuteSingleCell(query).equals("11.99"); // true
-	}
+    }
 	
-	@Test
+    @Test
     public void canExecuteView() {
         var query = "select * from film_list where actors like '%bob fawcett%'";
         accessor.Execute(query);
@@ -50,5 +50,5 @@ public class JdbcTests {
                      "2, @count)";
 
         accessor.Execute(query);
-	}
+    }
 }
