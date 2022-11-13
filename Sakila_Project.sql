@@ -45,7 +45,8 @@ values ('Elliot', 'Alderson', 75,
 insert into store (manager_staff_id, address_id, last_update)
 values ((select staff_id from staff -- no ID hard coding
          where first_name = 'Elliot' and last_name = 'Alderson'),
-         34, current_time());
+         (select address_id from address where address = '127 Purnea (Purnia) Manor'),
+         current_time());
 
 commit;
 
