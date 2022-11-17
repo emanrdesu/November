@@ -1,0 +1,100 @@
+-----------TEST 1----------------
+TITLE: ampeg.com Artist Gear Test
+DESCRIPTION: A test to see if artist pages on ampeg.com have gear listed on their individual page.
+ENVIRONMENT: Vanilla Firefox 107
+REQUIREMENT: That all artists featured have gear listed on them.
+EXPECTED RESULT: All artists have listed gear
+
+ACTUAL RESULT:
+Some artists have no gear listed in their pages. 
+Particularly, artists 'Rick "The Bass Player" Rosas' and 'Rob Wasserman'
+have no gear listed at all.
+Links:
+https://ampeg.com/artists/380/Rob%20Wasserman
+https://ampeg.com/artists/382/Rick
+
+STEPS TO REPRODUCE:
+1. Enter "ampeg.com" into URL bar.
+2. Click on Artists link in the top.
+3. Click on all sublisted artists in the artists page.
+4. Check that the listed gear isn't empty.
+5. Click on the pages for Rosas and Wasserman
+6. Find out they don't have gear listed on their pages.
+
+-----------TEST 2----------------
+TITLE: ampeg.com Product Page Consistency Test
+DESCRIPTION: A test to see if the product pages on ampeg.com have a consistent layout.
+ENVIRONMENT: Vanilla Firefox 107
+REQUIREMENT/EXPECTED RESULT: That all product pages have a consistency layout/UI.
+ACTUAL RESULT: The product pages fall into two layouts and not into one consistent layout.
+
+STEPS TO REPRODUCE:
+1. Enter "ampeg.com" into URL bar.
+2. Click on Products link in the top.
+3. Click on all sublisted products in the page.
+4. Find out that some older products have an old layout, 
+   and some newer products have a new layout(s), which contain youtube links
+5. The new product's page's layouts aren't consistent either,
+   some have, "BUY NOW", and others do not.
+
+
+-----------TEST 3----------------
+TITLE: ampeg.com mail validation
+DESCRIPTION: A test to see if the mailing list page allows valid email addresses
+ENVIRONMENT: Firefox 107
+REQUIREMENT/EXPECTED RESULT: The mailing list sign up form allows valid email address as input
+ACTUAL RESULT: The form does not allow all valid email address as input.
+
+STEPS TO REPRODUCE:
+1. Navigate to ampeg.com
+2. Go to the bottom of the page.
+3. Click Subscribe Button
+4. Enter "email@123.123.123.123" as input in the Email Address box.
+5. Get error message for "invalid domain" (even though as per Wikipedia, 
+   it's a valid email address).
+
+-----------TEST 4----------------
+TITLE: ampeg.com sign up test
+DESCRIPTION: A test to see if one is able to sign up in ampeg.com
+ENVIRONMENT: Firefox 107
+EXPECTED RESULT/ACTUAL RESULT: Able to sign up
+STEPS TO REPRODUCE:
+
+1. Navigate to 10minutemail.com and copy generated email address
+2. Navigate to ampeg.com and click on the Account icon next to the cart icon
+3. Click Create account
+4. Input the genreated email address, as well as the rest of the form with arbitrary values
+5. Click Create Account
+6. This will create your account.
+
+-----------TEST 5----------------
+TITLE: ampeg.com login test
+DESCRIPTION: A test for login functionality in ampeg.com .
+ENVIRONMENT: Firefox 107
+REFERENCE: TEST #4
+EXPECTED RESULT/ACTUAL RESULT: Able to login.
+
+STEPS TO REPRODUCE:
+1. Navigate to ampeg.com and click on the Account icon next to the cart icon
+2. Input username and password from account created in TEST 4 or any valid account.
+3. Click "Sign In" Button
+4. Get redirected to the main page, and now the account icon is red,
+   indicating successful login status.
+
+-----------TEST 6----------------
+TITLE: ampeg.com product manuals language test
+DESCRIPTION: A test to see if the manual pages for a product contains the manual
+	     as requested in the language given in the drop down UI control.
+ENVIRONMENT: Firefox 107
+REQUIREMENT/EXPECTED RESULT: Able to get a manual in the specified language
+ACTUAL RESULT: Sometimes not able to get a manual in the specified languages
+
+STEPS TO REPRODUCE:
+1. Navigte to ampeg.com
+2. Click on Support link in the top
+3. Click on "Current Manuals" UI Control
+4. Click on the first link "V-4B" image
+5. Click on the drop-down list in the right
+6. Specify "Bulgarian" as the language of choice
+7. Witness page not giving Bulgarian manual
+8. If you choose Chinese, you will get a Chinese manual however
