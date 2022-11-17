@@ -1,5 +1,4 @@
 package data.access;
-
 import java.sql.*;
 import java.util.*;
 
@@ -33,7 +32,7 @@ public class DatabaseUtility implements DatabaseAccessor {
             List<DataRow> result = new ArrayList<>();
 
             while(resultSet.next())
-                result.add(new Row(resultSet));
+                result.add(Row.Parse(resultSet));
 
             return result.toArray(new DataRow[0]);
         }
