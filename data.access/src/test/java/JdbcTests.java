@@ -18,13 +18,6 @@ public class JdbcTests {
     }
 
     @Test
-    public void canAccessDatabase () {
-        // already called beforehand 
-        // technically this method can be empty 
-        setup();
-    }
-
-    @Test
     public void canExecuteSingleColumn() {
         var query = "select city from city order by city desc limit 10";
         accessor.ExecuteSingleColumn(query);
