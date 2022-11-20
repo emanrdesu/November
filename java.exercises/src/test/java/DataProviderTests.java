@@ -71,11 +71,11 @@ public class DataProviderTests {
 		var errorMessage = "State should be returned";
 		Assert.assertEquals(actualState, expectedState, errorMessage);
 	}
-
+ 
 	@Test
 	public void canGetState2() {
 		var expectedState = "Texas";
-		
+
 		var actualState = getState(LocationObjectMothers.Houston());
 		
 		var errorMessage = "State should be returned";
