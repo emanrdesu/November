@@ -17,11 +17,11 @@ footer span
 
 5. Page: /select-menu. Write a selector that will get the option element where value = 4.
 
-div option[value='4']
+div#selectMenuContainer option[value='4']
 
 6. Page: /slider. Write the JavaScript to get the value for the element with id=sliderValue.
 
-document.getElementById('sliderValue')
+document.getElementById('sliderValue').value
 
 7. Page: /text-box. Write the JavaScript to set the value for the element with id=username.
 
