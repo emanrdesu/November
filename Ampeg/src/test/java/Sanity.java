@@ -1,19 +1,20 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import ampeg_auto.DriverManager;
 import ampeg_auto.DriverManagerFactory;
+import page.*;
 
 public class Sanity {
     private DriverManager driverManager;
     private WebDriver driver;
 
-    @BeforeTest
+    @BeforeMethod
     public void setup() {
         String browserType = "chrome";
 
@@ -24,7 +25,7 @@ public class Sanity {
         driver.manage().window().maximize();
     }
 
-    @AfterTest
+    @AfterMethod
     public void cleanup() {
         driverManager.quitDriver();
     }
@@ -34,5 +35,43 @@ public class Sanity {
       var url = "https://ampeg.com/index.html";
       driver.navigate().to(url);
       Assert.assertEquals(driver.getCurrentUrl(), url, "Ampeg URL expected");
-  }
+    }
+
+    @Test
+    public void canGetArtistName() {
+        String expectedName = "Abbi Roth";
+        String actualName = new AmpegHome(this.driver)
+                               .clickArtistsPage()
+                               .clickAbbiRoth()
+                               .getArtistName();
+
+        Assert.assertEquals(actualName, expectedName, "Artist name expected");
+    }
+
+    @Test
+    public void canSignUpToMailingList() {
+        String expectedText = "Thank you for subscribing!";
+        HeritagePage heritage = new AmpegHome(this.driver)
+                                    .clickProductsPage()
+                                    .clickHeritagePage();
+
+        heritage.signUpToMailingList();
+        if(!heritage.subscribeSucess()) {
+            String errorMessage = "Successful mailing list signup text expected.";
+            Assert.assertEquals("", expectedText, errorMessage);    
+        }
+    }
+    
+    @Test
+    public void canGetSensitivity() {
+        String expected = "Sensitivity: 98dB";
+        String actual = new AmpegHome(this.driver)
+                            .clickProductsPage()
+                            .clickProneoSeriesPage()
+                            .clickPN410LFPage()
+                            .getSensitivity();
+
+        var errorMessage = "Product sensitivity expected.";
+        Assert.assertEquals(actual, expected, errorMessage);
+    }
 }
