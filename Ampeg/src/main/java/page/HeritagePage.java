@@ -10,13 +10,16 @@ public class HeritagePage extends AmpegPage {
         super(driver);
         this.route = "/products/heritage";
     }
+    
+    private String getRandomEmailAddress() {
+        int x = (int) System.currentTimeMillis() % 100;
+        return "fake" + Integer.toString(x) + "@email.com";
+    }
 
     public void signUpToMailingList() {
-        int x = (int) System.currentTimeMillis() % 100;
-        
         this.driver
             .findElement(By.cssSelector("#mce-EMAIL"))
-            .sendKeys("fake" + Integer.toString(x) + "@email.com");
+            .sendKeys(getRandomEmailAddress());
 
         this.driver
             .findElement(By.cssSelector("#mce-MMERGE5"))
