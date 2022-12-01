@@ -9,4 +9,9 @@ public abstract class Page {
     public String getURL() {
         return index + route;
     }
+    
+    public Page navigate() {
+        this.driver.navigate().to(getURL());
+        return this;
+    }
 }

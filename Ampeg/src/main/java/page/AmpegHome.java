@@ -6,7 +6,6 @@ public class AmpegHome extends AmpegPage {
     public AmpegHome(WebDriver driver) {
         super(driver);
         this.route = "";
-        this.driver.navigate().to(getURL());
     }
 
     public ArtistPage clickArtistsPage() {
@@ -23,5 +22,11 @@ public class AmpegHome extends AmpegPage {
             .click();
 
         return new ProductsPage(this.driver);
+    }
+    
+    @Override
+    public AmpegHome navigate() {
+        super.navigate();
+        return this;
     }
 }

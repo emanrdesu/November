@@ -41,6 +41,7 @@ public class Sanity {
     public void canGetArtistName() {
         String expectedName = "Abbi Roth";
         String actualName = new AmpegHome(this.driver)
+                               .navigate()
                                .clickArtistsPage()
                                .clickAbbiRoth()
                                .getArtistName();
@@ -52,6 +53,7 @@ public class Sanity {
     public void canSignUpToMailingList() {
         String expectedText = "Thank you for subscribing!";
         HeritagePage heritage = new AmpegHome(this.driver)
+                                    .navigate()
                                     .clickProductsPage()
                                     .clickHeritagePage();
 
@@ -66,6 +68,7 @@ public class Sanity {
     public void canGetSensitivity() {
         String expected = "Sensitivity: 98dB";
         String actual = new AmpegHome(this.driver)
+                            .navigate()
                             .clickProductsPage()
                             .clickProneoSeriesPage()
                             .clickPN410LFPage()
