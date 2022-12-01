@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import ampeg_auto.DriverManager;
 import ampeg_auto.DriverManagerFactory;
@@ -52,16 +53,18 @@ public class Sanity {
     @Test
     public void canSignUpToMailingList() {
         String expectedText = "Thank you for subscribing!";
+        String xpath = "//div[text()='" + expectedText + "']";
+
         HeritagePage heritage = new AmpegHome(this.driver)
                                     .navigate()
                                     .clickProductsPage()
                                     .clickHeritagePage();
 
         heritage.signUpToMailingList();
-        if(!heritage.subscribeSucess()) {
-            String errorMessage = "Successful mailing list signup text expected.";
-            Assert.assertEquals("", expectedText, errorMessage);    
-        }
+        var actualText = driver.findElement(By.xpath(xpath)).getText();
+
+        String errorMessage = "Successful mailing list signup text expected.";
+        Assert.assertEquals(actualText, expectedText, errorMessage);
     }
     
     @Test

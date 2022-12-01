@@ -31,18 +31,4 @@ public class HeritagePage extends AmpegPage {
             .findElement(By.cssSelector("#mc-embedded-subscribe"))
             .click();
      }
-
-    public boolean subscribeSucess() {
-        String expected = "Thank you for subscribing!";
-        String xpath = "//div[text()='" + expected + "']";
-
-        try {
-            this.driver.findElement(By.xpath(xpath));
-            return true;
-        }
-        catch (NoSuchElementException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 }
