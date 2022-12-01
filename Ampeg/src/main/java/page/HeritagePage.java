@@ -21,9 +21,11 @@ public class HeritagePage extends AmpegPage {
             .findElement(By.cssSelector("#mce-EMAIL"))
             .sendKeys(getRandomEmailAddress());
 
+        var unitedStates = "U";
+
         this.driver
             .findElement(By.cssSelector("#mce-MMERGE5"))
-            .sendKeys("U"); // selects United States
+            .sendKeys(unitedStates);
 
         this.driver
             .findElement(By.cssSelector("#mc-embedded-subscribe"))
