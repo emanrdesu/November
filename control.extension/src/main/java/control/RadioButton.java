@@ -9,6 +9,6 @@ public class RadioButton extends Control {
     }
 
     public void select() {
-        this.element.click();
+        super.click();
     }
 }
