@@ -12,10 +12,8 @@ public class HyperlinkTests extends TestBase {
 
         HyperLinksPage page = new HyperLinksPage(this.driver);
         page.navigate();
+        page.getCreatedLink().click();
 
-        WebElement element = page.getCreatedLink();
-
-        new HyperLink(element).click();
         var actualCode = page.getStatusCode();
         Assert.assertEquals(actualCode, expectedCode, "Status code expected.");
     }

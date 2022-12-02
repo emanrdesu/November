@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import control.HyperLink;
+
 public class HyperLinksPage extends Page {
 
     @FindBy(how=How.XPATH, using="//p/a[@id='created']")
@@ -17,8 +19,8 @@ public class HyperLinksPage extends Page {
         this.route = "/links";
     }
 
-    public WebElement getCreatedLink() {
-        return this.link;
+    public HyperLink getCreatedLink() {
+        return new HyperLink(this.link);
     }
 
     public String getStatusCode() {
