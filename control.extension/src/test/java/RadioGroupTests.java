@@ -1,11 +1,9 @@
-
-import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.Assert;
 
 import page.*;
 
-public class ControlExtensionTests extends TestBase {
-
+public class RadioGroupTests extends TestBase {
     @Test
     public void canSelectButton() {
         var expectedLabel = "Yes";
