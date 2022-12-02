@@ -1,11 +1,9 @@
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import control.*;
-import page.*;
+import page.HyperLinksPage;
 
-public class HyperlinkTests extends TestBase {
+public class HyperLinkTests extends TestBase {
     @Test
     public void canClickHyperLink() {
         var expectedCode = "201";
