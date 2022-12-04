@@ -1,7 +1,7 @@
 package control;
 import org.openqa.selenium.WebElement;
 
-public class Control {
+public abstract class Control {
 
     protected WebElement element;
 
