@@ -17,10 +17,10 @@ public class MultiSelect extends Control {
     }
 
     public void select(String option) {
-        WebElement interactElement = getInputElement();
-        interactElement.sendKeys(option);
-        interactElement.sendKeys(Keys.ENTER);
-        interactElement.sendKeys(Keys.ESCAPE);
+        WebElement inputElement = getInputElement();
+        inputElement.sendKeys(option);
+        inputElement.sendKeys(Keys.ENTER);
+        inputElement.sendKeys(Keys.ESCAPE);
     }
 
     public String[] getSelected() {
