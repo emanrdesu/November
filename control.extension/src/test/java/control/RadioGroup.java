@@ -18,7 +18,7 @@ public class RadioGroup extends Control {
 
     public String getSelected() {
         try {
-            WebElement clicked = this.element.findElement(By.xpath("//p/span"));
+            WebElement clicked = this.element.findElement(By.xpath("./p/span"));
             return clicked.getText();
         }
         catch(NoSuchElementException e) {

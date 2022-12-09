@@ -25,7 +25,7 @@ public class MultiSelect extends Control {
 
     public String[] getSelected() {
         return this.element
-                   .findElements(By.xpath("//div[@class='css-12jo7m5']"))
+                   .findElements(By.xpath(".//div[@class='css-12jo7m5']"))
                    .stream()
                    .map(WebElement::getText)
                    .collect(Collectors.toList())
