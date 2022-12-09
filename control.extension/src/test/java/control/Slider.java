@@ -9,7 +9,7 @@ public class Slider extends Control {
 
     public Slider(WebElement element) {
         super(element);
-        this.slider = element.findElement(By.xpath("//span/input"));
+        this.slider = element.findElement(By.xpath(".//span/input"));
     }
 
     private WebElement getElement() {
