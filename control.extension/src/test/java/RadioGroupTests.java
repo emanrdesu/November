@@ -1,9 +1,13 @@
 import org.testng.annotations.Test;
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 
-import page.*;
+import page.RadioButtonPage;
 
 public class RadioGroupTests extends TestBase {
+
+    private final Class<NoSuchElementException> NSEE = NoSuchElementException.class;
+
     @Test
     public void canSelectButton() {
         var expectedLabel = "Yes";
@@ -30,13 +34,12 @@ public class RadioGroupTests extends TestBase {
 
     @Test
     public void cannotSelectButton() {
-        String expectedLabel = null;
         var radioGroup = new RadioButtonPage(this.driver)
                               .navigate()
                               .getRadioGroup();
 
         radioGroup.getButton("No").select();
-        var actualLabel = radioGroup.getSelected();
-        Assert.assertTrue(actualLabel == expectedLabel, "Null label expected");
+
+        Assert.assertThrows(NSEE, () -> radioGroup.getSelected());
     }
 }

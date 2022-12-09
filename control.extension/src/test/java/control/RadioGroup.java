@@ -1,7 +1,6 @@
 package control;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 public class RadioGroup extends Control {
@@ -17,13 +16,8 @@ public class RadioGroup extends Control {
     }
 
     public String getSelected() {
-        try {
-            WebElement clicked = this.element.findElement(By.xpath("./p/span"));
-            return clicked.getText();
-        }
-        catch(NoSuchElementException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return this.element
+                   .findElement(By.xpath("./p/span"))
+                   .getText();
     }
 }
