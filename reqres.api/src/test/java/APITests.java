@@ -12,9 +12,9 @@ import java.util.HashMap;
 import org.hamcrest.Matchers;
 
 public class APITests {
-    
+
     private String index = "https://reqres.in";
-    
+
     private HashMap<String, String> parameters(String... keyValuePairs) {
         var result = new HashMap<String, String>(); 
         var index = 0; var halfLength = keyValuePairs.length / 2; 
@@ -86,30 +86,44 @@ public class APITests {
             statusCode(expectedCode);
     }
 
-    @Test
-    public void canPatch() {
+    
+    private void canUpdate(String verb) {
         var expectedCode = 200;
         var expectedName = "morpheus2";
         var route = "/api/users/2";
 
         Response[] response = new Response[2];
 
-        for(int i = 0; i < 2; i++)
-            response[i] = 
-                RestAssured.given().
+        for(int i = 0; i < 2; i++) {
+            var beforeVerb = 
+               RestAssured.given().
                     baseUri(index).
                     contentType(ContentType.JSON).
                     body(parameters("name", expectedName)).
-                when().
-                    patch(route).
+               when();
+
+            var atVerb = (verb == "put") ? beforeVerb.put(route) : beforeVerb.patch(route);
+
+            response[i] = atVerb.
                 then().
                     statusCode(expectedCode).
                     body("name", Matchers.equalTo(expectedName)).
                 extract().
                     response();
+        }
 
         String timeStamp1 = response[0].path("updatedAt");
         String timeStamp2 = response[0].path("updatedAt");
         Assert.assertTrue(timeStamp1.compareTo(timeStamp2) <= 0, "Update expected");
+    }
+
+    @Test
+    public void canPatch() {
+        canUpdate("patch");
+    }
+
+    @Test
+    public void canPut() {
+        canUpdate("put");
     }
 }
