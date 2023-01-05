@@ -1,16 +1,30 @@
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.matcher.RestAssuredMatchers.*;
+
+import java.util.HashMap;
 import org.hamcrest.Matchers;
 
 public class APITests {
     
-    private String index = "https://reqres.in";  
+    private String index = "https://reqres.in";
     
+    private HashMap<String, String> parameters(String... keyValuePairs) {
+        var result = new HashMap<String, String>(); 
+        var index = 0; var halfLength = keyValuePairs.length / 2; 
+
+        while(halfLength-- != 0)
+            result.put(keyValuePairs[index++], keyValuePairs[index++]);
+
+        return result;
+    }
+
     @Test
     public void canRun() {
         RestAssured.when().
@@ -18,15 +32,84 @@ public class APITests {
         then().
             statusCode(200);
     }
-    
+
     @Test
     public void canGetEmailAddress() {
+        var route = "/api/users/2";
+
+        var expectedCode = 200;
         var expectedEmail = "janet.weaver@reqres.in";
 
-        RestAssured.when().
-            get(index + "/api/users/2").
+        RestAssured.given().
+            baseUri(index).
+        when().
+            get(route).
         then().
-            statusCode(200).
+            statusCode(expectedCode).
             body("data.email", Matchers.equalTo(expectedEmail));
+    }
+    
+    @Test
+    public void canGetToken() {
+        var route = "/api/register";
+        var expectedCode = 200;
+        var expectedToken = "QpwL5tke4Pnpja7X4";
+        
+        var params = parameters(
+            "email", "eve.holt@reqres.in",
+            "password", "pistol"
+        );
+
+        System.out.println(params);
+        
+        RestAssured.given().
+            baseUri(index).
+            contentType(ContentType.JSON).
+            body(params).
+        when().
+            post(route).
+        then().
+            statusCode(expectedCode).
+            body("token", Matchers.equalTo(expectedToken));
+    }
+
+    @Test
+    public void canDelete() {
+        var route = "/api/users/2";
+        var expectedCode = 204;
+
+        RestAssured.given().
+            baseUri(index).
+        when().
+            delete(route).
+        then().
+            statusCode(expectedCode);
+    }
+
+    @Test
+    public void canPatch() {
+        var expectedCode = 200;
+        var expectedName = "morpheus2";
+        var route = "/api/users/2";
+
+        Response[] response = new Response[2];
+
+        for(int i = 0; i < 2; i++)
+            response[i] = 
+                RestAssured.given().
+                    baseUri(index).
+                    contentType(ContentType.JSON).
+                    body(parameters("name", expectedName)).
+                when().
+                    patch(route).
+                then().
+                    statusCode(expectedCode).
+                    body("name", Matchers.equalTo(expectedName)).
+                extract().
+                    response();
+
+        String timeStamp1 = response[0].path("updatedAt");
+        String timeStamp2 = response[0].path("updatedAt");
+        Assert.assertTrue(timeStamp1.compareTo(timeStamp2) <= 0, "Update expected");
     }
 }
