@@ -3,10 +3,7 @@ import org.testng.annotations.Test;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import io.restassured.http.Method;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-import io.restassured.matcher.RestAssuredMatchers.*;
 
 import java.util.HashMap;
 import org.hamcrest.Matchers;
@@ -23,14 +20,6 @@ public class APITests {
             result.put(keyValuePairs[index++], keyValuePairs[index++]);
 
         return result;
-    }
-
-    @Test
-    public void canRun() {
-        RestAssured.when().
-            get(index).
-        then().
-            statusCode(200);
     }
 
     @Test
@@ -54,14 +43,14 @@ public class APITests {
         var route = "/api/register";
         var expectedCode = 200;
         var expectedToken = "QpwL5tke4Pnpja7X4";
-        
+
         var params = parameters(
             "email", "eve.holt@reqres.in",
             "password", "pistol"
         );
 
         System.out.println(params);
-        
+
         RestAssured.given().
             baseUri(index).
             contentType(ContentType.JSON).
@@ -86,7 +75,6 @@ public class APITests {
             statusCode(expectedCode);
     }
 
-    
     private void canUpdate(String verb) {
         var expectedCode = 200;
         var expectedName = "morpheus2";
@@ -113,8 +101,8 @@ public class APITests {
         }
 
         String timeStamp1 = response[0].path("updatedAt");
-        String timeStamp2 = response[0].path("updatedAt");
-        Assert.assertTrue(timeStamp1.compareTo(timeStamp2) <= 0, "Update expected");
+        String timeStamp2 = response[1].path("updatedAt");
+        Assert.assertTrue(timeStamp1.compareTo(timeStamp2) < 0, "Update expected");
     }
 
     @Test
@@ -125,5 +113,77 @@ public class APITests {
     @Test
     public void canPut() {
         canUpdate("put");
+    }
+
+    @Test
+    public void canDeserialize() {
+        var route = "/api/users/2";
+
+        var expectedCode = 200;
+
+        var expectedID = 2;
+        var expectedEmail = "janet.weaver@reqres.in";
+        var expectedFirstName = "Janet";
+        var expectedLastName = "Weaver";
+        var expectedAvatar = "https://reqres.in/img/faces/2-image.jpg";
+
+        var expectedURL = "https://reqres.in/#support-heading";
+        var expectedText = "To keep ReqRes free, contributions towards server costs are appreciated!";
+
+        Response response = 
+                RestAssured.given().
+                    baseUri(index).
+                    contentType("application/json").
+                when().
+                    get(route).
+                then().
+                    statusCode(expectedCode).
+                extract().
+                    response();
+
+        User user = response.as(User.class);
+
+        Assert.assertEquals(user.getData().getId(), expectedID, "id expected");
+        Assert.assertEquals(user.getData().getEmail(), expectedEmail, "email expected");
+        Assert.assertEquals(user.getData().getFirst_name(), expectedFirstName, "first name expected");
+        Assert.assertEquals(user.getData().getLast_name(), expectedLastName, "last name expected");
+        Assert.assertEquals(user.getData().getAvatar(), expectedAvatar, "avatar expected");
+
+        Assert.assertEquals(user.getSupport().getURL(), expectedURL, "url expected");
+        Assert.assertEquals(user.getSupport().getText(), expectedText, "text expected");
+     }
+    
+    @Test
+    public void canDeserializeUsers() {
+        var route = "/api/users?page=2";
+        var expectedCode = 200;
+
+        var expectedPage = 2;
+        var expectedPerPage = 6;
+        var expectedTotal = 12;
+        var expectedTotalPages = 2;
+        var expectedURL = "https://reqres.in/#support-heading";
+        var expectedText = "To keep ReqRes free, contributions towards server costs are appreciated!";
+
+        Response response = 
+                RestAssured.given().
+                    baseUri(index).
+                    contentType("application/json").
+                when().
+                    get(route).
+                then().
+                    statusCode(expectedCode).
+                extract().
+                    response();
+
+        UserList userList = response.as(UserList.class);
+
+        Assert.assertEquals(userList.getPage(), expectedPage, "page expected");
+        Assert.assertEquals(userList.getPer_page(), expectedPerPage, "per page expected");
+        Assert.assertEquals(userList.getTotal(), expectedTotal, "total expected");
+        Assert.assertEquals(userList.getTotal_pages(), expectedTotalPages, "total pages expected");
+
+        Assert.assertEquals(userList.getSupport().getURL(), expectedURL, "url expected");
+        Assert.assertEquals(userList.getSupport().getText(), expectedText, "text expected");
     }
 }
