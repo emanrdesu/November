@@ -20,7 +20,7 @@ public class ProductsPage extends AmpegPage {
 
     public ProneoPage clickProneoSeriesPage() {
         this.driver
-            .findElement(By.cssSelector("a[href='/products/proneo/']"))
+            .findElement(By.cssSelector("a[href='/products/pro/']"))
             .click();
 
         return new ProneoPage(this.driver);

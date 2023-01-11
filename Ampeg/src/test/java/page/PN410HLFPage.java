@@ -10,11 +10,12 @@ public class PN410HLFPage extends AmpegPage {
         this.route = "/products/proneo/pn410hlf";
     }
 
-    public String getSensitivity() {
-        String xpath = "//div[@class='specsCopy']//strong[text()='Sensitivity']/..";
+    public String getWeight() {
+        String css = "div.col-xs-22 ul li";
 
         return this.driver
-                .findElement(By.xpath(xpath))
+                .findElements(By.cssSelector(css))
+                .get(4)
                 .getText();
     }
 }

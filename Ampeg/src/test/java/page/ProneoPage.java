@@ -12,7 +12,7 @@ public class ProneoPage extends AmpegPage {
 
     public PN410HLFPage clickPN410LFPage() {
         this.driver
-            .findElement(By.cssSelector("a[href='/products/proneo/pn410hlf/']"))
+            .findElement(By.xpath("//h2[text()='PN-410HLF']/../a"))
             .click();
 
         return new PN410HLFPage(this.driver);
