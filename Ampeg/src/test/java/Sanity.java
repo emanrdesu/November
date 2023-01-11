@@ -66,7 +66,7 @@ public class Sanity {
         String errorMessage = "Successful mailing list signup text expected.";
         Assert.assertEquals(actualText, expectedText, errorMessage);
     }
-    
+
     @Test
     public void canGetWeight() {
         String expected = "64 lb (29 kg)";
