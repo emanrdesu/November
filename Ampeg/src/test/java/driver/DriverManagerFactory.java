@@ -1,4 +1,4 @@
-package ampeg_auto;
+package driver;
 
 public class DriverManagerFactory {
     public static DriverManager getManager(String browser) {

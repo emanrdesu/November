@@ -7,8 +7,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import ampeg_auto.DriverManager;
-import ampeg_auto.DriverManagerFactory;
+import driver.DriverManager;
+import driver.DriverManagerFactory;
 import page.*;
 
 public class Sanity {
