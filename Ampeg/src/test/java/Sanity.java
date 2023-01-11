@@ -22,8 +22,7 @@ public class Sanity {
         driverManager = DriverManagerFactory.getManager(browserType);
         driverManager.createDriver();
         driver = driverManager.getDriver();
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @AfterMethod
@@ -40,12 +39,13 @@ public class Sanity {
 
     @Test
     public void canGetArtistName() {
-        String expectedName = "Abbi Roth";
-        String actualName = new AmpegHome(this.driver)
+        var artistID = 101;
+        var expectedName = "Seye Adelekan";
+        var actualName = new AmpegHome(this.driver)
                                .navigate()
                                .clickArtistsPage()
-                               .clickAbbiRoth()
-                               .getArtistName();
+                               .clickArtist(artistID)
+                               .getArtistName(artistID);
 
         Assert.assertEquals(actualName, expectedName, "Artist name expected");
     }
@@ -68,16 +68,16 @@ public class Sanity {
     }
     
     @Test
-    public void canGetSensitivity() {
-        String expected = "Sensitivity: 98dB";
+    public void canGetWeight() {
+        String expected = "64 lb (29 kg)";
         String actual = new AmpegHome(this.driver)
                             .navigate()
                             .clickProductsPage()
                             .clickProneoSeriesPage()
                             .clickPN410LFPage()
-                            .getSensitivity();
+                            .getWeight();
 
-        var errorMessage = "Product sensitivity expected.";
+        var errorMessage = "Product weight expected.";
         Assert.assertEquals(actual, expected, errorMessage);
     }
 }
