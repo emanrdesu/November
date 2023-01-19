@@ -37,6 +37,7 @@ public class Calculator {
         String string = null;
 
         switch(x) {
+        case 0: string = "Zero"; break;
         case 1: string = "One"; break;
         case 2: string = "Two"; break;
         case 3: string = "Three"; break;
