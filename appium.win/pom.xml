@@ -3,16 +3,28 @@
   <groupId>quintrix</groupId>
   <artifactId>appium.win</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+    <build> 
+  	<plugins> 
+  		<plugin> 
+  			<groupId>org.apache.maven.plugins</groupId> 
+  			<artifactId>maven-compiler-plugin</artifactId> 
+  			<version>3.8.1</version> 
+  			<configuration> 
+  				<release>11</release> 
+  			</configuration> 
+  		</plugin> 
+  	</plugins> 
+  </build>
   <dependencies>
 	  <dependency>
 		  <groupId>io.appium</groupId>
 		  <artifactId>java-client</artifactId>
-		  <version>8.3.0</version>
+		  <version>7.4.1</version>
 	  </dependency>
 	  <dependency>
 		  <groupId>org.seleniumhq.selenium</groupId>
 		  <artifactId>selenium-java</artifactId>
-		  <version>4.7.2</version>
+		  <version>3.141.59</version>
 	  </dependency>
   </dependencies>
 </project>
