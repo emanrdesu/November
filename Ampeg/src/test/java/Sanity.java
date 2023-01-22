@@ -3,6 +3,7 @@ import org.testng.annotations.Test;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -79,5 +80,11 @@ public class Sanity {
 
         var errorMessage = "Product weight expected.";
         Assert.assertEquals(actual, expected, errorMessage);
+    }
+    
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void canFailAndRetry() {
+        var decimal = new Random().nextDouble();
+        Assert.assertTrue(decimal < 0.3);
     }
 }
