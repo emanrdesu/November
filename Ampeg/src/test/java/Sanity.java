@@ -3,12 +3,13 @@ import org.testng.annotations.Test;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import ampeg_auto.DriverManager;
-import ampeg_auto.DriverManagerFactory;
+import driver.DriverManager;
+import driver.DriverManagerFactory;
 import page.*;
 
 public class Sanity {
@@ -22,8 +23,7 @@ public class Sanity {
         driverManager = DriverManagerFactory.getManager(browserType);
         driverManager.createDriver();
         driver = driverManager.getDriver();
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @AfterMethod
@@ -40,12 +40,13 @@ public class Sanity {
 
     @Test
     public void canGetArtistName() {
-        String expectedName = "Abbi Roth";
-        String actualName = new AmpegHome(this.driver)
+        var artistID = 101;
+        var expectedName = "Seye Adelekan";
+        var actualName = new AmpegHome(this.driver)
                                .navigate()
                                .clickArtistsPage()
-                               .clickAbbiRoth()
-                               .getArtistName();
+                               .clickArtist(artistID)
+                               .getArtistName(artistID);
 
         Assert.assertEquals(actualName, expectedName, "Artist name expected");
     }
@@ -66,18 +67,24 @@ public class Sanity {
         String errorMessage = "Successful mailing list signup text expected.";
         Assert.assertEquals(actualText, expectedText, errorMessage);
     }
-    
+
     @Test
-    public void canGetSensitivity() {
-        String expected = "Sensitivity: 98dB";
+    public void canGetWeight() {
+        String expected = "64 lb (29 kg)";
         String actual = new AmpegHome(this.driver)
                             .navigate()
                             .clickProductsPage()
                             .clickProneoSeriesPage()
                             .clickPN410LFPage()
-                            .getSensitivity();
+                            .getWeight();
 
-        var errorMessage = "Product sensitivity expected.";
+        var errorMessage = "Product weight expected.";
         Assert.assertEquals(actual, expected, errorMessage);
+    }
+    
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void canFailAndRetry() {
+        var decimal = new Random().nextDouble();
+        Assert.assertTrue(decimal < 0.3);
     }
 }
