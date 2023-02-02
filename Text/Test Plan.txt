@@ -1,0 +1,137 @@
+Apparels Shopping Website Test Plan
+
+Prepared By: Ernesto Perez Pozo
+12/12/2022
+####################################
+
+INTRODUCTION:
+This is a test plan for the Bussiness Requirements Document given
+for an online e-commerce apparels shopping website.
+
+OBJECTIVES:
+To detail how tests are to be done, by when, and by whom.
+
+SCOPE: 
+   1. The front end of the website.
+   2. The back end of the website.
+      * Includes database(s) which hosts user and product data.
+
+TEST STRATEGY:
+   TESTING TYPES:
+       Test Objective:
+       Technique:
+       Completion Criteria:
+       Special Consideration:
+       * UNIT TESTS
+       <FR-001#1> <FR-014#1,2>
+       Test Objective: User can login into the website using email and password.
+       Technique: 
+           * Input valid email and passwod into login page.
+           * Ensure customer's name or username is present on redirect page.
+           * Ensure said customer details are the same as given by the database.
+           * Ensure cookie is set on the browser upon login. 
+       Completion Criteria: User is logged onto the website, and cookie is set.
+       Special Consideration: Should work for admin login as well.
+
+       <FR-001#2> <FR-014#3>
+       Test Objective: User can reset password.
+       Technique:
+           * Click login page reset button
+           * Input valid email address
+           * Check mail for said email address
+           * Click link sent on email
+           * Reset password in the page
+           * Login with same email and new password
+	   * Ensure database record is appropriately updated.
+       Completion Criteria: Valid user can reset password
+       Special Consideration: Only accounts created with the site are valid for password reset.
+
+	<FR-001#3>
+       Test Objective: User can login into website using Facebook and Google account.
+       Technique:
+	   * Click login page's Facebook or Google button
+           * Login on redirected Facebook or Google page
+           * Give access to website
+           * Ensure user is logged on by checking for username or name on redirected website page.
+           * Ensure account type is foreign on database
+       Completion Criteria: Valid Google or Facebook user can login
+       Special Considerations: None
+         
+
+	<FR-005#1,3>
+	Test Objective: User can see product details on product page
+	Technique:
+		* Click on product page
+		* Ensure the following product details are on page
+			* Product Title
+			* Thumbnail Image
+			* Product Images
+			* Product Description
+			* Price
+			* Sizes / Colors
+			* Ratings and Reviews
+
+	<FR-005#2>
+	Test Objective: User can check shipping availability by entering ZIP code
+	Technique:
+		* Click on a product's page
+		* Click on "shipping availibility" button
+		* Enter valid zip code
+	Completion Criteria: Page is updated and has text "Available" or "Not Available"
+
+	
+
+	<FR-006#1>
+       Test Objective: Only logged in users have option to add to wish list.
+       Technique:
+           * Click on a product page without login
+           * Ensure an add to wishlist button is not present
+	   * Login with valid user
+	Completion Criteria: Add to wishlist button is present
+
+	<FR-006#2>
+        Test Objective: User can view/add/delete products added into his wishlist.
+	Technique:
+	    * Login with valid user
+	    * Click on a product's page
+	    * Click on add to wish list
+	    * Go to user's wishlist
+	    * Ensure added product in wishlist
+	    * Delete product from wishlist
+	 Comletion Criteria: Wishlist does not contain deleted product
+
+	<FR-006#3>
+	Test Objective: User can proceed to checkout from wishlist page
+	Technique:
+	    * Login with valid user
+	    * Click on a product's page
+	    * Click on add to wish list
+	    * Go to user's wishlist
+	    * Click proceed to checkout
+	Completion Criteria: Last page is checkout page.
+
+   RISKS & ISSUES:
+       * Populating database data with fake data.
+       * Deleting real data from the database.
+       * Testing order creation (since orders cannot be deleted)
+
+   TOOLS:
+	Manual Tests: Chromium or Edge
+	Automated Tests: Selenium + Java
+
+   ROLES:
+       * Lead is Dennis Taylor
+       * Unit tests to be shared among the Quintrix November Cohort
+       * Integration tests to shared among the Cohort and Lead, given Lead's order
+       * System Tests to be done by Lead only
+
+
+    TIMELINE:
+	* If there are 15 team members in the cohort, and each takes on 2 tests,
+	  then 1 week is enough time for the unit tests.
+	* Integration tests, albeit less in number, require a little more time to get done,
+	  give this 1 week too
+	* The final week is for system tests
+	* In total 3 weeks for tests to be completed.
+
+
